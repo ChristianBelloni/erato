@@ -1,0 +1,15 @@
+{
+  "originHash" : "e6f8dd37e2d7f8c484de5979048617c052d680c58faf6aa3935249302eba7417",
+  "pins" : [
+    {
+      "identity" : "betterauthswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ouwargui/BetterAuthSwift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4d74b9c0bde4e7d9bbbf6f95461fd09fd5e3e0f8"
+      }
+    }
+  ],
+  "version" : 3
+}
