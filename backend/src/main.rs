@@ -14,9 +14,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let database_url = std::env::var("DATABASE_URL")
         .unwrap_or_else(|_| "sqlite://better-auth-axum.db?mode=rwc".to_string());
     let database = Database::connect(&database_url).await?;
+    let base_url =
+        std::env::var("BASE_URL").unwrap_or_else(|_| "http://localhost:3001".to_string());
     run_auth_migrations(&database).await?;
 
-    let auth = auth(database.clone()).await;
+    let auth = auth(&base_url, database.clone()).await;
 
     let state = AppState::new(auth.clone(), database, "erato");
 

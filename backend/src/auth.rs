@@ -5,9 +5,7 @@ use better_auth::AuthSchema;
 use better_auth::BetterAuth;
 use better_auth::email::ConsoleEmailProvider;
 use better_auth::plugins::EmailPasswordPlugin;
-use better_auth::plugins::EmailVerificationConfig;
 use better_auth::plugins::EmailVerificationPlugin;
-use better_auth::plugins::SendVerificationEmail;
 use better_auth::plugins::SessionManagementPlugin;
 use better_auth::seaorm::AuthEntity;
 use better_auth::seaorm::SeaOrmStore;
@@ -15,10 +13,10 @@ use better_auth::seaorm::sea_orm;
 use better_auth::seaorm::sea_orm::Schema;
 use better_auth::seaorm::sea_orm::entity::prelude::*;
 
-pub async fn auth(database: DatabaseConnection) -> Arc<BetterAuth<AppAuthSchema>> {
+pub async fn auth(base_url: &str, database: DatabaseConnection) -> Arc<BetterAuth<AppAuthSchema>> {
     let config = AuthConfig::new("your-very-secure-secret-key-at-least-32-chars-long")
         .trusted_origin("erato://")
-        .base_url("http://localhost:3001/api/auth")
+        .base_url(format!("{base_url}/api/auth"))
         .password_min_length(8);
 
     let store = SeaOrmStore::<AppAuthSchema>::new(config.clone(), database.clone());

@@ -5,6 +5,7 @@ use better_auth::{BetterAuth, seaorm::DatabaseConnection};
 
 use crate::auth::AppAuthSchema;
 
+#[allow(unused)]
 #[derive(Clone)]
 pub struct AppState {
     auth: Arc<BetterAuth<AppAuthSchema>>,
